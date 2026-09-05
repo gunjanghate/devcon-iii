@@ -1,0 +1,26 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #fbf9f5;
+  --foreground: #27160c;
+}
+
+* {
+  box-shadow: none !important;
+  text-shadow: none !important;
+  filter: none !important;
+}
+
+body {
+  color: var(--foreground);
+  background-color: var(--background);
+  min-height: 100vh;
+  letter-spacing: -0.015em;
+}
+
+/* Crisp button active state without bouncy shadows */
+button:active {
+  transform: translateY(1px);
+}
