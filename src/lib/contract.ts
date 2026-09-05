@@ -46,6 +46,7 @@ export async function recordStampForCustomer(customerAddressOrDid: string): Prom
 
   // If real Ethereum contract details are provided, perform genuine on-chain transaction
   if (rpcUrl && staffPrivateKey && contractAddress && isEthAddress && contractAddress !== '0x0000000000000000000000000000000000000000') {
+    try {
       const provider = new ethers.JsonRpcProvider(rpcUrl);
       const normalizedKey = staffPrivateKey.trim().startsWith('0x') ? staffPrivateKey.trim() : `0x${staffPrivateKey.trim()}`;
       const staffSigner = new ethers.Wallet(normalizedKey, provider);

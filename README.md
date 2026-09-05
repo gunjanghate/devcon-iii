@@ -1,7 +1,7 @@
 # 🥖 Ramesh's Bakery: The Loyalty Card That Can't Be Copied
 
 > **Rule of the Bakery:** Ten stamps = One free artisan cake.  
-> **The Problem:** Customers photocopy paper punch cards; counter staff stamp anything handed to them; Ramesh loses money every month.  
+> **The Problem:** Customers photocopy paper punch cards; counter staff stamp whatever is handed to them; Ramesh loses money every month.  
 > **The Solution:** Cryptographic loyalty stamps living where photocopiers cannot reach — backed by Ethereum Sepolia smart contracts, Privy embedded wallets, and server-side token verification.
 
 ---
@@ -12,6 +12,7 @@
 - [Login Methods Enabled](#login-methods-enabled)
 - [How Users Get a Wallet Without Clicking "Create Wallet"](#how-users-get-a-wallet-without-clicking-create-wallet)
 - [How the Server Establishes Who Is Asking](#how-the-server-establishes-who-is-asking)
+- [Design System & Typography](#design-system--typography)
 - [Handling the Dull States Honestly](#handling-the-dull-states-honestly)
 - [Smart Contract Architecture (`BakeryLoyaltyCard.sol`)](#smart-contract-architecture)
 - [Test Cases & Compliance Checklist (80/80 Points)](#test-cases--compliance-checklist)
@@ -27,12 +28,13 @@
 
 ## 📌 Overview
 
-Ramesh's morning customers are commuters grabbing sourdough or a croissant on their way to work. They will **not** install browser extensions, they will **not** write down a 12-word recovery phrase in the bakery queue, and if the app asks them to connect an external web3 wallet, they will hand their phone back and pay cash.
+Ramesh's morning customers are commuters grabbing sourdough, croissants, or coffee on their way to work. They will **not** install browser extensions, they will **not** write down a 12-word recovery phrase in the bakery queue, and if the app asks them to connect an external web3 wallet, they will hand their phone back and pay cash.
 
-This application provides:
+This application delivers:
 1. **Frictionless Onboarding:** Commuters sign in using their normal Email or Google account in under 20 seconds.
 2. **Invisible Embedded Wallet:** A non-custodial Ethereum wallet is generated automatically on login without the customer ever clicking "Create Wallet".
 3. **Photocopy-Proof Security:** The server verifies cryptographic Privy session tokens and awards stamps on-chain or in state strictly against verified token claims. Stamping cannot be forged, spoofed, or photocopied.
+4. **Sleek Architectural UI:** Sharp, non-rounded, flat modernist aesthetic with tall, punchy typography via Google Fonts (`Bebas Neue` & `Space Grotesk`).
 
 ---
 
@@ -45,7 +47,7 @@ config={{
   loginMethods: ['email', 'google', 'sms'],
   appearance: {
     theme: 'light',
-    accentColor: '#d1823f', // Bakery warm caramel
+    accentColor: '#27160c', // High-contrast bakery deep roast
     showWalletLoginFirst: false, // Commuter-friendly: no confusing web3 prompts
   },
   embeddedWallets: {
@@ -55,7 +57,7 @@ config={{
 }}
 ```
 
-- **Email (Magic Link / OTP Code):** Quick and universal for all customers.
+- **Email (Magic Link / OTP Code):** Quick, frictionless access for all customers.
 - **Google OAuth:** 1-tap sign-in on Android and iOS mobile browsers.
 - **SMS:** Immediate mobile verification.
 - **`showWalletLoginFirst: false`:** Ensures the first screen never displays intimidating Web3/extension prompts.
@@ -69,7 +71,7 @@ Test Case 2 requires that authenticated users receive a wallet automatically wit
 This is implemented at two independent levels:
 
 1. **Declarative SDK Configuration (`src/app/providers.tsx`):**
-   `embeddedWallets.createOnLogin` is set to `'users-without-wallets'`. Privy automatically creates an embedded Ethereum wallet upon successful authentication.
+   `embeddedWallets.createOnLogin` is set to `'users-without-wallets'`. Privy automatically provisions an embedded Ethereum wallet upon successful authentication.
 2. **Deterministic Auto-Trigger (`src/app/page.tsx`):**
    ```typescript
    useEffect(() => {
@@ -150,10 +152,20 @@ In naive apps, the client sends `{ userId: "user_123" }` or `{ walletAddress: "0
 
 ---
 
+## 🎨 Design System & Typography
+
+- **Zero Roundness (`rounded-none`):** Every container, card, button, punch slot, and modal is built with sharp, 90-degree architectural borders (`border-2 border-bakery-950`).
+- **Zero Shadows or Glows:** All drop shadows, box shadows, and glow effects are completely removed for a sleek, flat editorial finish.
+- **Tall, Punchy Display Typography:** Uses Next.js Google Fonts:
+  - **`Bebas Neue`** (`font-display`): Tall, towering condensed display typeface that gives headlines and buttons commanding vertical height without squished horizontal stretching.
+  - **`Space Grotesk`** (`font-sans`): Expressive, quirky grotesque sans-serif with ink traps for crisp card descriptions and badges.
+
+---
+
 ## ☕ Handling the Dull States Honestly
 
 1. **Initializing SDK State (`ready === false`):**
-   `src/app/page.tsx` checks `if (!ready) return <InitializingState />` before evaluating `authenticated`. Shows a warm "Warming the Ovens..." loader with no flash of unauthenticated UI.
+   `src/app/page.tsx` checks `if (!ready) return <InitializingState />` before evaluating `authenticated`. Shows a flat, sharp "Warming the Ovens..." screen with no flash of unauthenticated UI.
 2. **Login Abandoned Halfway:**
    If a user closes the modal or aborts authentication, Privy cleanly resets without leaving the app in an inconsistent state. The pre-login screen remains fully interactive.
 3. **Failed Stamp Requests / Network Drops:**
@@ -215,10 +227,11 @@ Then edit `.env.local` with your actual credentials:
 NEXT_PUBLIC_PRIVY_APP_ID=your_actual_privy_app_id
 PRIVY_APP_SECRET=your_actual_privy_app_secret
 NEXT_PUBLIC_CHAIN_ID=11155111
-SEPOLIA_RPC_URL=https://sepolia.infura.io/v3/YOUR_INFURA_KEY
-BAKERY_STAFF_PRIVATE_KEY=your_staff_private_key_without_0x_or_with_0x
+SEPOLIA_RPC_URL=https://flashy-greatest-sea.ethereum-sepolia.quiknode.pro/YOUR_TOKEN/
+BAKERY_STAFF_PRIVATE_KEY=your_staff_private_key_with_or_without_0x
 NEXT_PUBLIC_LOYALTY_CONTRACT_ADDRESS=0x0000000000000000000000000000000000000000
 ```
+*(Supports QuickNode, Alchemy, or Infura RPC endpoints. The private key works automatically with or without the `0x` prefix).*
 
 ### 3. Compile Smart Contracts
 Compile `BakeryLoyaltyCard.sol` using Hardhat:

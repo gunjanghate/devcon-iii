@@ -7,14 +7,13 @@ import PunchCard from '@/components/PunchCard';
 import StaffCounterStation from '@/components/StaffCounterStation';
 import InitializingState from '@/components/InitializingState';
 import {
-  Sparkles,
   ArrowRight,
   ShieldCheck,
-  CheckCircle,
-  HelpCircle,
+  Check,
   Coffee,
   AlertTriangle,
   RotateCcw,
+  Sparkles,
   Zap,
 } from 'lucide-react';
 
@@ -136,47 +135,59 @@ export default function BakeryLoyaltyPage() {
   // =========================================================================
   if (!authenticated) {
     return (
-      <div className="min-h-screen flex flex-col bg-gradient-to-b from-bakery-50 via-white to-bakery-100">
+      <div className="min-h-screen flex flex-col bg-[#fbf9f5] text-bakery-950 selection:bg-bakery-950 selection:text-white">
         <Navbar />
 
-        <main className="flex-1 max-w-xl mx-auto px-4 py-8 flex flex-col items-center justify-center text-center">
-          {/* Bakery Hero Badge */}
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-bakery-100 border border-bakery-300 text-bakery-800 text-xs font-bold mb-6">
-            <Sparkles className="w-3.5 h-3.5 text-bakery-600" />
+        <main className="flex-1 max-w-xl mx-auto px-6 py-12 flex flex-col items-center justify-center text-center">
+          {/* Bakery Hero Badge - Sharp, Architectural */}
+          <div className="inline-flex items-center gap-2 px-3 py-1 bg-white border border-bakery-950 text-bakery-950 font-mono text-[11px] font-bold uppercase tracking-widest mb-6">
+            <Sparkles className="w-3.5 h-3.5 text-bakery-700" />
             <span>Ramesh&apos;s Artisan Bakery &amp; Cafe</span>
           </div>
 
-          <h2 className="text-3xl sm:text-4xl font-black text-bakery-950 tracking-tight leading-tight mb-4">
-            The Loyalty Card That <br className="hidden sm:inline" />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-bakery-600 to-amber-700">
-              Can&apos;t Be Copied
+          {/* High-impact Tall Display Heading using Bebas Neue */}
+          <h2 className="font-display text-6xl sm:text-7xl uppercase tracking-wider text-bakery-950 leading-[0.88] mb-5">
+            The Loyalty Card <br />
+            <span className="text-bakery-600 underline decoration-4 underline-offset-8">
+              That Can&apos;t Be Copied
             </span>
           </h2>
 
-          <p className="text-sm sm:text-base text-bakery-700 max-w-md mb-8 leading-relaxed">
+          <p className="font-sans text-sm sm:text-base text-bakery-800 max-w-md mb-10 leading-relaxed font-medium">
             Ramesh is tired of paper punch cards photocopied by fraudsters. 
             Earn genuine stamps for your morning coffee and loaves. 
-            <strong> 10 stamps = 1 free artisan cake!</strong>
+            <span className="block mt-1 font-bold text-bakery-950">10 stamps = 1 free artisan cake.</span>
           </p>
 
-          {/* Commuter First-Screen Guarantee */}
-          <div className="w-full bg-white rounded-3xl p-6 border border-bakery-200 shadow-xl mb-8 text-left">
-            <h3 className="text-xs font-black uppercase tracking-wider text-bakery-600 mb-4">
-              Designed for the Commute Rush
-            </h3>
+          {/* Commuter First-Screen Guarantee - Sharp 2px Border Box, No Shadows */}
+          <div className="w-full bg-white border-2 border-bakery-950 p-6 sm:p-8 text-left">
+            <div className="border-b border-bakery-200 pb-3 mb-5 flex items-center justify-between">
+              <h3 className="font-display text-sm uppercase tracking-wider text-bakery-950">
+                Designed for the Commute Rush
+              </h3>
+              <span className="font-mono text-[10px] uppercase font-bold text-bakery-600">
+                Zero Friction
+              </span>
+            </div>
 
-            <div className="space-y-3 text-xs text-bakery-800">
+            <div className="space-y-3.5 font-sans text-xs text-bakery-900 font-medium">
               <div className="flex items-start gap-3">
-                <CheckCircle className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-                <span><strong>No crypto wallet needed:</strong> Sign in with just your normal email or Google account.</span>
+                <div className="w-4 h-4 mt-0.5 border border-bakery-950 bg-bakery-100 flex items-center justify-center shrink-0">
+                  <Check className="w-3 h-3 text-bakery-950" />
+                </div>
+                <span><strong className="font-bold text-bakery-950">No crypto wallet needed:</strong> Sign in with your standard email or Google account.</span>
               </div>
               <div className="flex items-start gap-3">
-                <CheckCircle className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-                <span><strong>Zero recovery phrases:</strong> No seed phrases to write down while paying in queue.</span>
+                <div className="w-4 h-4 mt-0.5 border border-bakery-950 bg-bakery-100 flex items-center justify-center shrink-0">
+                  <Check className="w-3 h-3 text-bakery-950" />
+                </div>
+                <span><strong className="font-bold text-bakery-950">Zero recovery phrases:</strong> No seed phrases to write down while paying in queue.</span>
               </div>
               <div className="flex items-start gap-3">
-                <CheckCircle className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-                <span><strong>Invisible security:</strong> A cryptographic embedded wallet is created instantly behind the scenes.</span>
+                <div className="w-4 h-4 mt-0.5 border border-bakery-950 bg-bakery-100 flex items-center justify-center shrink-0">
+                  <Check className="w-3 h-3 text-bakery-950" />
+                </div>
+                <span><strong className="font-bold text-bakery-950">Invisible security:</strong> A cryptographic embedded wallet is created instantly behind the scenes.</span>
               </div>
             </div>
 
@@ -185,18 +196,18 @@ export default function BakeryLoyaltyPage() {
                ========================================================================= */}
             <button
               onClick={login}
-              className="mt-6 w-full py-3.5 px-5 bg-gradient-to-r from-bakery-600 to-amber-700 hover:from-bakery-700 hover:to-amber-800 text-white font-bold rounded-2xl shadow-lg shadow-bakery-600/20 hover:shadow-xl transition-all flex items-center justify-center gap-2 group text-sm"
+              className="mt-6 w-full py-4 px-6 bg-bakery-950 hover:bg-bakery-800 text-white font-display text-sm uppercase tracking-widest border-2 border-bakery-950 transition-colors flex items-center justify-center gap-2 group cursor-pointer leading-none"
             >
               <span>Sign In with Email or Google</span>
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </button>
-            <p className="text-[11px] text-center text-bakery-500 mt-2">
+            <p className="font-mono text-[10px] uppercase text-center text-bakery-600 mt-3 tracking-wider">
               Takes less than 20 seconds. No app installation needed.
             </p>
           </div>
 
-          <div className="flex items-center gap-2 text-xs text-bakery-600">
-            <ShieldCheck className="w-4 h-4 text-bakery-600" />
+          <div className="mt-8 flex items-center gap-2 font-mono text-[11px] uppercase tracking-wider text-bakery-700 font-semibold">
+            <ShieldCheck className="w-4 h-4 text-emerald-700" />
             <span>Backed by Ethereum Sepolia smart contracts &amp; verified token claims</span>
           </div>
         </main>
@@ -208,37 +219,39 @@ export default function BakeryLoyaltyPage() {
   // Authenticated Screen: Customer Loyalty Punch Card View
   // =========================================================================
   return (
-    <div className="min-h-screen flex flex-col bg-gradient-to-b from-bakery-50 via-white to-bakery-100">
+    <div className="min-h-screen flex flex-col bg-[#fbf9f5] text-bakery-950 selection:bg-bakery-950 selection:text-white">
       <Navbar />
 
-      <main className="flex-1 max-w-2xl mx-auto px-4 py-8 w-full">
-        {/* Error notification for dull states */}
+      <main className="flex-1 max-w-2xl mx-auto px-6 py-10 w-full">
+        {/* Error notification for dull states - Sharp box */}
         {errorNotice && (
-          <div className="mb-6 p-4 rounded-2xl bg-amber-50 border border-amber-300 text-amber-900 text-xs flex items-center justify-between shadow-sm">
+          <div className="mb-6 p-4 bg-amber-50 border-2 border-amber-900 text-amber-950 font-sans text-xs flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <AlertTriangle className="w-4 h-4 text-amber-600 shrink-0" />
+              <AlertTriangle className="w-4 h-4 text-amber-700 shrink-0" />
               <span>{errorNotice}</span>
             </div>
             <button
               onClick={loadCustomerStamps}
-              className="inline-flex items-center gap-1 font-bold text-amber-800 hover:underline shrink-0 ml-2"
+              className="inline-flex items-center gap-1 font-mono uppercase font-bold text-amber-950 hover:underline shrink-0 ml-3"
             >
               <RotateCcw className="w-3.5 h-3.5" /> Retry
             </button>
           </div>
         )}
 
-        {/* Customer Welcome */}
-        <div className="text-center mb-6">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-bold mb-2">
-            <Zap className="w-3.5 h-3.5" />
-            <span>Active Commuter Card</span>
+        {/* Customer Header */}
+        <div className="border-b-2 border-bakery-950 pb-4 mb-8 flex flex-col sm:flex-row sm:items-end justify-between gap-2">
+          <div>
+            <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 bg-emerald-100 border border-emerald-900 text-emerald-950 font-mono text-[10px] font-bold uppercase tracking-widest mb-1.5">
+              <Zap className="w-3 h-3 text-emerald-800" />
+              <span>Active Commuter Card</span>
+            </div>
+            <h2 className="font-display font-black text-3xl uppercase tracking-tight text-bakery-950 leading-none">
+              Your Punch Card
+            </h2>
           </div>
-          <h2 className="text-2xl font-black text-bakery-950">
-            Your Ramesh&apos;s Loyalty Card
-          </h2>
-          <p className="text-xs text-bakery-700">
-            Tamper-proof &amp; uncopiable. Stamped directly at the counter.
+          <p className="font-mono text-xs uppercase tracking-wider text-bakery-700 font-bold">
+            Photocopy-Proof &bull; Sepolia Verified
           </p>
         </div>
 
@@ -252,7 +265,7 @@ export default function BakeryLoyaltyPage() {
           redeeming={redeeming}
         />
 
-        {/* Staff Counter Station (Simulates counter interaction in bakery queue) */}
+        {/* Staff Counter Station (Register checkout station) */}
         <StaffCounterStation
           onStampAwarded={(updated) => {
             setStampData((prev) => ({
@@ -264,17 +277,29 @@ export default function BakeryLoyaltyPage() {
           }}
         />
 
-        {/* Technical Guarantee Breakdown */}
-        <div className="mt-8 bg-white/70 rounded-2xl p-5 border border-bakery-200 text-xs text-bakery-700">
-          <h4 className="font-bold text-bakery-900 mb-2 flex items-center gap-1.5">
-            <ShieldCheck className="w-4 h-4 text-bakery-600" />
-            How Ramesh stops photocopiers:
+        {/* Technical Guarantee Breakdown - Sharp Flat Box */}
+        <div className="mt-8 bg-white border-2 border-bakery-950 p-5 text-xs text-bakery-800">
+          <h4 className="font-display font-bold uppercase tracking-widest text-bakery-950 mb-3 flex items-center gap-2">
+            <ShieldCheck className="w-4 h-4 text-bakery-950" />
+            <span>How Ramesh Stops Photocopiers:</span>
           </h4>
-          <ul className="list-disc list-inside space-y-1 text-[11px] leading-relaxed">
-            <li><strong>Zero Client Trust:</strong> The server never asks the browser &quot;who are you?&quot;</li>
-            <li><strong>Verified Access Token:</strong> Every stamp request transmits a cryptographic Privy bearer token.</li>
-            <li><strong>Claim-Derived Identity:</strong> The server inspects verified claims to identify the customer.</li>
-            <li><strong>Embedded Key:</strong> Your identity maps to a non-custodial EVM wallet created seamlessly on login.</li>
+          <ul className="space-y-2 font-sans text-xs leading-relaxed">
+            <li className="flex items-start gap-2">
+              <span className="font-mono font-bold text-bakery-950">&bull;</span>
+              <span><strong>Zero Client Trust:</strong> The server never accepts self-reported customer IDs or addresses from the browser.</span>
+            </li>
+            <li className="flex items-start gap-2">
+              <span className="font-mono font-bold text-bakery-950">&bull;</span>
+              <span><strong>Verified Access Token:</strong> Every stamp punch sends a cryptographic Privy bearer token verified server-side.</span>
+            </li>
+            <li className="flex items-start gap-2">
+              <span className="font-mono font-bold text-bakery-950">&bull;</span>
+              <span><strong>Claim-Derived Identity:</strong> The server reads the verified DID claims to credit the punch card.</span>
+            </li>
+            <li className="flex items-start gap-2">
+              <span className="font-mono font-bold text-bakery-950">&bull;</span>
+              <span><strong>Embedded Key:</strong> Self-custodial Ethereum address generated automatically on login.</span>
+            </li>
           </ul>
         </div>
       </main>

@@ -2,14 +2,14 @@
 
 import React, { useState } from 'react';
 import { usePrivy } from '@privy-io/react-auth';
-import { Stamp, AlertCircle, CheckCircle2, Loader2, ShieldAlert, Coffee } from 'lucide-react';
+import { Stamp, Check, Loader2, ShieldAlert, Coffee } from 'lucide-react';
 
 interface StaffStationProps {
   onStampAwarded: (updatedData: any) => void;
 }
 
 export default function StaffCounterStation({ onStampAwarded }: StaffStationProps) {
-  const { getAccessToken, user } = usePrivy();
+  const { getAccessToken } = usePrivy();
   const [loading, setLoading] = useState(false);
   const [statusMessage, setStatusMessage] = useState<{
     type: 'success' | 'error' | 'info';
@@ -48,7 +48,7 @@ export default function StaffCounterStation({ onStampAwarded }: StaffStationProp
 
       setStatusMessage({
         type: 'success',
-        text: `Success! Stamp #${data.currentStamps} punched. Transaction: ${data.txHash?.slice(0, 10)}...`,
+        text: `Verified! Stamp #${data.currentStamps} punched to on-chain card. Tx: ${data.txHash?.slice(0, 12)}...`,
       });
 
       onStampAwarded(data);
@@ -65,60 +65,64 @@ export default function StaffCounterStation({ onStampAwarded }: StaffStationProp
   };
 
   return (
-    <div className="bg-white rounded-3xl p-6 border border-bakery-200 shadow-lg mt-6 max-w-md mx-auto">
-      <div className="flex items-center justify-between mb-4">
-        <div className="flex items-center gap-2">
-          <div className="w-8 h-8 rounded-xl bg-bakery-100 flex items-center justify-center text-bakery-700">
+    <div className="bg-white border-2 border-bakery-950 p-6 mt-6 max-w-lg mx-auto">
+      <div className="flex items-center justify-between border-b border-bakery-200 pb-3 mb-4">
+        <div className="flex items-center gap-2.5">
+          <div className="w-8 h-8 bg-bakery-950 text-white flex items-center justify-center shrink-0">
             <Coffee className="w-4 h-4" />
           </div>
           <div>
-            <h4 className="text-sm font-bold text-bakery-900">Bakery Register Counter</h4>
-            <p className="text-[11px] text-bakery-600">Morning commute checkout</p>
+            <h4 className="font-display font-extrabold text-xs uppercase tracking-widest text-bakery-950">
+              Bakery Register Checkout
+            </h4>
+            <p className="font-mono text-[10px] text-bakery-600 uppercase tracking-wider">
+              Morning commute checkout
+            </p>
           </div>
         </div>
-        <span className="text-[10px] font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded-full uppercase">
+        <span className="font-mono text-[10px] font-bold text-bakery-950 border border-bakery-950 px-2 py-0.5 bg-bakery-100 uppercase">
           Tamper-Proof
         </span>
       </div>
 
-      <p className="text-xs text-bakery-700 mb-4 leading-relaxed">
-        Ordered your daily coffee or morning loaf? Tap below to record a verified stamp directly to your non-copiable card.
+      <p className="font-sans text-xs text-bakery-800 mb-5 leading-relaxed font-medium">
+        Ordered your daily coffee or morning sourdough? Tap below to punch a verified stamp directly to your non-copiable card.
       </p>
 
-      {/* Action Button */}
+      {/* Action Button - Sharp Rectangular Button */}
       <button
         onClick={handleAwardStamp}
         disabled={loading}
-        className="w-full flex items-center justify-center gap-2 py-3 px-4 bg-bakery-600 hover:bg-bakery-700 active:bg-bakery-800 text-white font-bold rounded-2xl shadow-md hover:shadow-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed group text-sm"
+        className="w-full flex items-center justify-center gap-2 py-3.5 px-5 bg-bakery-950 hover:bg-bakery-800 active:bg-black text-white font-display font-extrabold text-xs uppercase tracking-widest border-2 border-bakery-950 transition-colors disabled:opacity-50 disabled:cursor-not-allowed group cursor-pointer"
       >
         {loading ? (
           <>
             <Loader2 className="w-4 h-4 animate-spin" />
-            <span>Punching Stamp &amp; Verifying Session...</span>
+            <span>Punching Stamp &amp; Verifying Claims...</span>
           </>
         ) : (
           <>
-            <Stamp className="w-4 h-4 group-hover:rotate-12 transition-transform" />
+            <Stamp className="w-4 h-4 group-hover:scale-110 transition-transform" />
             <span>Punch Today&apos;s Stamp</span>
           </>
         )}
       </button>
 
-      {/* Status Messages for dull states */}
+      {/* Status Messages for dull states - Sharp Crisp Boxes */}
       {statusMessage && (
         <div
-          className={`mt-4 p-3 rounded-2xl text-xs flex items-start gap-2 animate-in fade-in duration-200 ${
+          className={`mt-4 p-3.5 text-xs font-sans font-medium flex items-start gap-2.5 border-2 ${
             statusMessage.type === 'success'
-              ? 'bg-emerald-50 text-emerald-800 border border-emerald-200'
-              : 'bg-red-50 text-red-800 border border-red-200'
+              ? 'bg-emerald-50 text-emerald-950 border-emerald-950'
+              : 'bg-red-50 text-red-950 border-red-950'
           }`}
         >
           {statusMessage.type === 'success' ? (
-            <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+            <Check className="w-4 h-4 text-emerald-800 shrink-0 mt-0.5" />
           ) : (
-            <ShieldAlert className="w-4 h-4 text-red-600 shrink-0 mt-0.5" />
+            <ShieldAlert className="w-4 h-4 text-red-800 shrink-0 mt-0.5" />
           )}
-          <span className="leading-tight">{statusMessage.text}</span>
+          <span className="leading-tight font-mono text-[11px]">{statusMessage.text}</span>
         </div>
       )}
     </div>

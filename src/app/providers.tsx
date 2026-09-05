@@ -23,7 +23,7 @@ export default function Providers({ children }: { children: React.ReactNode }) {
         loginMethods: ['email', 'google', 'sms'],
         appearance: {
           theme: 'light',
-          accentColor: '#d1823f', // Bakery warm caramel
+          accentColor: '#27160c', // High-contrast bakery deep roast
           showWalletLoginFirst: false,
           logo: 'https://images.unsplash.com/photo-1509440159596-0249088772ff?w=128&auto=format&fit=crop&q=80',
         },

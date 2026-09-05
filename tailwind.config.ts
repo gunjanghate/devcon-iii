@@ -9,8 +9,8 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        display: ['var(--font-syne)', 'sans-serif'],
-        sans: ['var(--font-space)', 'sans-serif'],
+        display: ['var(--font-display)', 'sans-serif'],
+        sans: ['var(--font-sans)', 'sans-serif'],
       },
       colors: {
         bakery: {

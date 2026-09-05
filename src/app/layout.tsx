@@ -1,18 +1,18 @@
 import type { Metadata } from 'next';
-import { Syne, Space_Grotesk } from 'next/font/google';
+import { Bebas_Neue, Space_Grotesk } from 'next/font/google';
 import './globals.css';
 import Providers from './providers';
 
-const syne = Syne({
+const bebasNeue = Bebas_Neue({
+  weight: '400',
   subsets: ['latin'],
-  variable: '--font-syne',
+  variable: '--font-display',
   display: 'swap',
-  weight: ['400', '600', '700', '800'],
 });
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ['latin'],
-  variable: '--font-space',
+  variable: '--font-sans',
   display: 'swap',
   weight: ['400', '500', '600', '700'],
 });
@@ -28,8 +28,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${syne.variable} ${spaceGrotesk.variable}`}>
-      <body className="antialiased font-sans bg-bakery-50 text-bakery-950">
+    <html lang="en" className={`${bebasNeue.variable} ${spaceGrotesk.variable}`}>
+      <body className="antialiased font-sans bg-[#fbf9f5] text-bakery-950">
         <Providers>{children}</Providers>
       </body>
     </html>
