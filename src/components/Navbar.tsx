@@ -12,9 +12,13 @@ export default function Navbar() {
   }
 
   const primaryEmail = user?.email?.address;
-  const embeddedWallet = user?.wallet?.address || user?.linkedAccounts?.find(
-    (acc: any) => acc.type === 'wallet' && acc.walletClientType === 'privy'
-  )?.address;
+  const linkedAccounts = (user?.linkedAccounts || []) as any[];
+  const embeddedWallet =
+    user?.wallet?.address ||
+    linkedAccounts.find(
+      (acc) => acc.type === 'wallet' && acc.walletClientType === 'privy'
+    )?.address ||
+    linkedAccounts.find((acc) => acc.type === 'wallet')?.address;
 
   const truncateAddress = (addr?: string) => {
     if (!addr) return '';

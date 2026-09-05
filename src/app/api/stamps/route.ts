@@ -34,11 +34,13 @@ export async function GET(req: NextRequest) {
     try {
       const privyUser = await privyServer.getUser(verifiedUserId);
       if (privyUser) {
-        const embeddedWallet =
-          privyUser.wallet?.address ||
-          privyUser.linkedAccounts?.find(
-            (acc: any) => acc.type === 'wallet' && acc.walletClientType === 'privy'
-          )?.address;
+        const linkedAccounts = (privyUser.linkedAccounts || []) as any[];
+        const walletAccount =
+          linkedAccounts.find(
+            (acc) => acc.type === 'wallet' && acc.walletClientType === 'privy'
+          ) || linkedAccounts.find((acc) => acc.type === 'wallet');
+
+        const embeddedWallet = (privyUser as any).wallet?.address || walletAccount?.address;
 
         if (embeddedWallet) {
           customerIdentifier = embeddedWallet;
